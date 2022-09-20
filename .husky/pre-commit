@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[0;33m'
+readonly NO_COLOR='\033[0m'
+
+echo -e "$YELLOW\n🏗️👷Styling, testing and building your project before committing."
+# Check Prettier standards
+npm run format || (
+    echo -e "$RED\n🤢🤮🤢🤮 Your styling looks disgusting. 🤢🤮🤢🤮 Prettier Check Failed. Run npm run format, add changes and try commit again.${NO_COLOR}\n";
+    false;
+)
+
+#Check ESLint Standards
+npm run lint || (
+       echo -e "$RED\n😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.${NO_COLOR}\n"
+       false;
+)
+
+# If everything passes... Now we can commit
+echo -e "$GREEN\n🤔🤔🤔🤔... Alright... Code looks good to me... Trying to build now. 🤔🤔🤔🤔${NO_COLOR}"
+
+npm run build || (
+    echo -e "${RED}\n❌👷🔨❌ Better call Bob... Because your build failed ❌👷🔨❌ Next build failed: View the errors above to see why.${NO_COLOR}\n"
+    false;
+)
+# If everything passes... Now we can commit
+echo -e "${GREEN}✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅\n${NO_COLOR}"
+

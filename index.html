@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<title>LMS</title>
+		<style>
+			input::-ms-reveal,
+			input::-ms-clear {
+				display: none;
+			}
+			/* Change Autocomplete styles in Chrome*/
+			input:-webkit-autofill,
+			input:-webkit-autofill:hover,
+			input:-webkit-autofill:focus,
+			textarea:-webkit-autofill,
+			textarea:-webkit-autofill:hover,
+			textarea:-webkit-autofill:focus,
+			select:-webkit-autofill,
+			select:-webkit-autofill:hover,
+			select:-webkit-autofill:focus {
+				box-shadow: 0 0 0px 1000px transparent inset;
+				transition: background-color 5000s ease-in-out 0s;
+			}
+			.animate-opacity {
+				animation: opac 0.8s;
+			}
+			@keyframes opac {
+				from {
+					opacity: 0;
+				}
+				to {
+					opacity: 1;
+				}
+			}
+		</style>
+	</head>
+	<body class="w-full h-screen overflow-hidden font-inter bg-[#fafafa]">
+		<div id="root" class="w-full h-full overflow-hidden animate-opacity"></div>
+		<script type="module" src="/src/main.tsx"></script>
+	</body>
+</html>
