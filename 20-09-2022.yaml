@@ -1,34 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+---  
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lms-webapitesting
+  name: abi-deployment
+  namespace: dev  
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: lms-webapi-app
+      app: abi-deployment
   template:
     metadata:
       labels:
-        app: lms-webapi-app
+        app: abi-deployment
     spec:
       containers:
-      - name: lms-webapidockerrepo
-        image: igetit2testcontainerregistry.azurecr.io/lms-abc
-	  imagePullPolicy: Always
+      - name: abi-deployment
+        image: igetit2testcontainerregistry.azurecr.io/fronted:latest
+        imagePullPolicy: Always
         ports:
-        - containerPort: 5000
-        
+        - containerPort: 3000
+        env:
+        - name: TITLE
+          value: "IGETITV2-API"
+      imagePullSecrets:
+      - name: igetit2
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: lms-webapi-app-svc  
+  name: abi-service 
+  namespace: dev
 spec:
-  selector:
-    app: lms-webapi-app
+  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000
-type: LoadBalancer
+  - port: 3000
+  selector:
+    app: abi-deployment
