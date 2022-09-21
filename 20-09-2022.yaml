@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: abi-deployment
-        image: igetit2testcontainerregistry.azurecr.io/fronted:latest
+        image: igetit2testcontainerregistry.azurecr.io/arun2602/fronted:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
